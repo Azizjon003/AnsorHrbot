@@ -1,0 +1,4 @@
+node_modules
+.env
+result.pdf
+text.json
