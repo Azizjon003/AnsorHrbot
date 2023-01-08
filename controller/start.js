@@ -1,5 +1,5 @@
 const { bot } = require("../index.js");
-const { HOME_KEYBOARD } = require("../utility/keyboard.js");
+const { HOME_KEYBOARD, adminKeyboard } = require("../utility/keyboard.js");
 // import { shuffle } from "../utility/shuffle";
 const db = require("../model/index");
 const User = db.user;
@@ -8,9 +8,9 @@ bot.command("start", async (ctx) => {
   const username = ctx?.from?.first_name;
   const id = ctx.update.message.from.id;
 
-  const user = await User.findOne({ where: { telegramId: id } });
+  let user = await User.findOne({ where: { telegramId: id } });
   if (!user) {
-    await User.create({
+    user = await User.create({
       telegramId: id,
       name: username,
     });
@@ -44,12 +44,23 @@ bot.command("start", async (ctx) => {
     "\n" +
     "<b>▫️Natijaviylik.</b>";
 
-  ctx.telegram.sendPhoto(id, "https://ibb.co/tQLpddP", {
-    caption: text,
+  if (user.role === "admin") {
+    ctx.telegram.sendPhoto(id, "https://ibb.co/tQLpddP", {
+      caption: text,
 
-    parse_mode: "HTML",
+      parse_mode: "HTML",
 
-    reply_markup: HOME_KEYBOARD,
-  });
+      reply_markup: adminKeyboard,
+    });
+  } else {
+    ctx.telegram.sendPhoto(id, "https://ibb.co/tQLpddP", {
+      caption: text,
+
+      parse_mode: "HTML",
+
+      reply_markup: HOME_KEYBOARD,
+    });
+  }
+
   return ctx.scene.enter("sceneWizard");
 });

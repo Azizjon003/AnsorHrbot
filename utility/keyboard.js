@@ -51,5 +51,35 @@ const category = {
   resize_keyboard: true,
   one_time_keyboard: true,
 };
-
 exports.category = category;
+
+const adminKeyboard = {
+  keyboard: [
+    [{ text: "Ansor savdo majmuasi bo'sh ish o'rinlari ⚡️" }],
+    [
+      {
+        text: "Biz haqimizda 💠",
+      },
+      {
+        text: "Biz bilan bog'lanish 📞",
+      },
+    ],
+    [
+      {
+        text: "Userlarni ko'rish ",
+      },
+      {
+        text: "Faol userlar",
+      },
+    ],
+    [
+      {
+        text: "Xabar yuborish",
+      },
+    ],
+  ],
+  resize_keyboard: true,
+  one_time_keyboard: true,
+};
+
+exports.adminKeyboard = adminKeyboard;

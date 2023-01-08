@@ -13,6 +13,7 @@ const bot = new Telegraf(TOKEN);
 const newWizart = new Composer();
 exports.newWizart = newWizart;
 require("./controller/connection.js");
+require("./controller/admin.js");
 require("./controller/aboutWe.js");
 require("./controller/working.js");
 const working = new Composer();
@@ -34,6 +35,10 @@ require("./controller/answer.js");
 const answerPhoto = new Composer();
 exports.answerPhoto = answerPhoto;
 require("./controller/photoAdd.js");
+
+const adminMessage = new Composer();
+exports.adminMessage = adminMessage;
+require("./controller/message.js");
 const menuSchema = new Scenes.WizardScene(
   "sceneWizard",
   newWizart,
@@ -41,7 +46,8 @@ const menuSchema = new Scenes.WizardScene(
   anketa,
   confirm,
   answer,
-  answerPhoto
+  answerPhoto,
+  adminMessage
 );
 
 const stage = new Scenes.Stage([menuSchema]);
